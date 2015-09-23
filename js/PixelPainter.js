@@ -1,8 +1,10 @@
-
+// // // // // // // Honeycomb Pixel Painter // // By: Brock Lanoza // // //
 var clickArray = [];
 var selectedColor = null;
 
+//this draw the painting canvas and builds the page
 function Canvas () {
+  var mousedown = false;
   var canvas = document.getElementById('canvas');
 
   //sidebar class
@@ -33,7 +35,7 @@ function Canvas () {
   });
 
 
-//declare the necessary elements for drawing a honeycomb(hexagon) shape
+  //declare the necessary elements for drawing a honeycomb(hexagon) shape
   var combHeight,
     combRadius,
     combRectHeight,
@@ -57,8 +59,20 @@ function Canvas () {
 
     drawCanvas(context, boardWidth, boardHeight);
 
-//on click function that 'paints' the clicked honeycomb
+    //set boolean to false if mouse is up (stops painting)
+    canvas.addEventListener('mouseup', function (evt) {
+      mousedown = false;
+    });
+
+    //set boolean to true if mouse is down (allows user to paint)
+    canvas.addEventListener('mousedown', function (evt) {
+      mousedown = true;
+    });
+
+    //on click function that 'paints' the clicked honeycomb
     canvas.addEventListener('mousemove', function (evt) {
+      if (!mousedown)
+      return;
       var x,
           y,
           combX,
@@ -95,7 +109,7 @@ function Canvas () {
     });
   } //end of the if statement
 
-//draw out the canvas of honeycombs
+  //draw out the canvas of honeycombs
   function drawCanvas (canvasContext, width, height) {
     var i,
         j;
@@ -114,7 +128,7 @@ function Canvas () {
     }
   }
 
-//draw out each individual honeycomb
+  //draw out each individual honeycomb
   function drawComb (canvasContext, x, y, fill, i, j) {
     var fill = fill || false;
 
@@ -127,7 +141,7 @@ function Canvas () {
     canvasContext.lineTo(x, y + combHeight);
     canvasContext.closePath();
 
-//check array to see if there are any filled combs to leave colored
+    //check array to see if there are any filled combs to leave colored
     for (var a = 0; a < clickArray.length; a++) {
       var obj = clickArray[a];
       if (obj.x === i && obj.y === j) {
@@ -145,72 +159,59 @@ function Canvas () {
 
 Canvas();
 
+//this function builds the color palette on the left side of the screen
+function Swatch () {
+
+  function createSwatch () {
+    var arr = [];
+    var num = 0;
+    var col = 6;
+    var preselectedColors = [
+    ['#FDEE51  ','#F3D057  ','#FDF175  ','#ECCE7F  ','#3D6018  ','#43691B  '],
+    ['#C2E44D  ','#90E23A  ','#ADE740  ','#73AD3A  ','#8FE677  ','#AAD988  '],
+    ['#65965F  ','#8BE18D  ','#6D6523  ','#4A6D47  ','#C63E36  ','#CA5038  '],
+    ['#D57F3E  ','#DF9642  ','#B74141  ','#561A17  ','#752F2C  ','#A55C35  '],
+    ['#D57957  ','#A73841  ','#C78A73  ','#C94C85  ','#80302C  ','#CF72A5  '],
+    ['#A05854  ','#C67B77  ','#E3AFB7  ','#DB9576  ','#C563F4  ','#913C71  '],
+    ['#AC77C5  ','#AF6B82  ','#CF7B6E  ','#D39562  ','#091E64  ','#2C2367  '],
+    ['#0F1F54  ','#1548EC  ','#542968  ','#5B4DCC  ','#608BDB  ','#8DF3F6  '],
+    ['#427072  ','#32396E  ','#60B2F0  ','#448AED  ','#ADCDDA  ','#5D9893  '],
+    ['#90C0EE  ','#A7B7D0  ','#595271  ','#5C6BDA  ','#3C67CB  ','#4E59B4  '],
+    ['#626D79  ','#4A709B  ','#3C6768  ','#7FCBBF  ','#979797  ','#C7C7C7  ']];
+    var rows = preselectedColors.length;
+
+    // creates a swatch that stores all the colors
+    for (var i = 0; i < rows; i++) {
+      for (var index = 0; index < col; index++) {
+
+        // paints colors into swatch container
+        var colorDiv = document.createElement('div');
+        var leftContainer = document.querySelector('#sidePiece');
+       
+        colorDiv.id = 'sidePiece';
+        colorDiv.style.display = 'inline-block';
+        colorDiv.style.background = preselectedColors[i][index];
+        colorDiv.style = preselectedColors[i][index];
+        colorDiv.href = '#';
+        colorDiv.style.height = '20px';
+        colorDiv.style.width = '30px';
+        colorDiv.style.border = '1px solid black';
+        colorDiv.style.padding = '10px';
 
 
+        colorDiv.addEventListener('click', returnColor);
 
-// Swatch
-
-function Swatch() {
-
+        leftContainer.appendChild(colorDiv);
+      }
+    }
+    function returnColor () {
+      selectedColor = this.style.background;
+    };
+  }
+  createSwatch();
 }
 
-Swatch.prototype.createSwatch = function() {
-  var arr = [];
-  var num = 0;
-  var col = 6;
-  var preselectedColors = [
-  ['#FDEE51  ','#F3D057  ','#FDF175  ','#ECCE7F  ','#3D6018  ','#43691B  '],
-  ['#C2E44D  ','#90E23A  ','#ADE740  ','#73AD3A  ','#8FE677  ','#AAD988  '],
-  ['#65965F  ','#8BE18D  ','#6D6523  ','#4A6D47  ','#C63E36  ','#CA5038  '],
-  ['#D57F3E  ','#DF9642  ','#B74141  ','#561A17  ','#752F2C  ','#A55C35  '],
-  ['#D57957  ','#A73841  ','#C78A73  ','#C94C85  ','#80302C  ','#CF72A5  '],
-  ['#A05854  ','#C67B77  ','#E3AFB7  ','#DB9576  ','#C563F4  ','#913C71  '],
-  ['#AC77C5  ','#AF6B82  ','#CF7B6E  ','#D39562  ','#091E64  ','#2C2367  '],
-  ['#0F1F54  ','#1548EC  ','#542968  ','#5B4DCC  ','#608BDB  ','#8DF3F6  '],
-  ['#427072  ','#32396E  ','#60B2F0  ','#448AED  ','#ADCDDA  ','#5D9893  '],
-  ['#90C0EE  ','#A7B7D0  ','#595271  ','#5C6BDA  ','#3C67CB  ','#4E59B4  '],
-  ['#626D79  ','#4A709B  ','#3C6768  ','#7FCBBF  ','#979797  ','#C7C7C7  ']];
-  var rows = preselectedColors.length;
-
-  // creates a swatch that stores all the colors
-  for (var i = 0; i < rows; i++) {
-    for (var index = 0; index < col; index++) {
-
-      // paints colors into swatch container
-      var colorDiv = document.createElement('div');
-      var leftContainer = document.querySelector('#sidePiece');
-     
-      colorDiv.id = 'sidePiece';
-      colorDiv.style.display = 'inline-block';
-      colorDiv.style.background = preselectedColors[i][index];
-      colorDiv.style = preselectedColors[i][index];
-      colorDiv.href = '#';
-      colorDiv.style.height = '20px';
-      colorDiv.style.width = '30px';
-      colorDiv.style.border = '1px solid black';
-      colorDiv.style.padding = '10px';
-
-
-      colorDiv.addEventListener('click', this.returnColor);
-
-      leftContainer.appendChild(colorDiv);
-
-    }
-   // leftContainer.appendChild(document.createElement('br'));
-  }
-};
-
-Swatch.prototype.returnColor = function() {
-  selectedColor = this.style.background;
-  colors.push(selectedColor);
-  counter++;
-  console.log(counter);
-  console.log(colors);
-};
-
-
-var colorSwatch = new Swatch();
-colorSwatch.createSwatch();
+Swatch();
 
 
 
