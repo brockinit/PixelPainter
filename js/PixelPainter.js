@@ -1,9 +1,6 @@
 
 var clickArray = [];
 var selectedColor = null;
-var colors = [];
-var counter = 0;
-
 
 function Canvas () {
   var canvas = document.getElementById('canvas');
@@ -89,11 +86,6 @@ function Canvas () {
       // Check if the mouse's coords are on the board
       if (combX >= 0 && combX < boardWidth) {
         if (combY >= 0 && combY < boardHeight) {
-          for (var b = 0; b < colors.length; b++) {
-            if (colors.indexOf(b) === counter - 1) {
-              context.fillStyle = colors[b]; console.log(colors[b]); //set to selected palette color
-            }
-          }
           var thisColor = selectedColor;
           drawComb(context, screenX, screenY, true);
           clickArray.push({ x : combX, y : combY, z : thisColor
@@ -140,7 +132,7 @@ function Canvas () {
       var obj = clickArray[a];
       if (obj.x === i && obj.y === j) {
         fill = true;
-        //canvasContext.fill = obj.z;
+        canvasContext.fillStyle = obj.z;
       }
     }
     if (fill) {
