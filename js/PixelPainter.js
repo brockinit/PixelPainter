@@ -14,10 +14,11 @@ function Canvas () {
 
   //sidebar class
   var sidebar = document.createElement('div');
-  //sidePiece.className = 'content';
   sidebar.id = 'sidePiece';
   contentDiv.appendChild(sidebar);
   var getSideBar = document.querySelector('#sidePiece'); console.log(getSideBar);
+
+  //add title to sidebar
   getSideBar.appendChild(title);
 
   //erase button unfills the last filled comb
@@ -39,6 +40,13 @@ function Canvas () {
     clickArray = [];
     drawCanvas(context, boardWidth, boardHeight);
   });
+
+  //create button div
+  var buttonDiv = document.createElement('div');
+  buttonDiv.id = 'buttonDiv';
+  getSideBar.appendChild(buttonDiv);
+  buttonDiv.appendChild(btnClear);
+  buttonDiv.appendChild(btnErase);
 
 
   //declare the necessary elements for drawing a honeycomb(hexagon) shape

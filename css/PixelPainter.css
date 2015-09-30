@@ -20,16 +20,7 @@ h1 {
 .content {
   width: 100%;
   height: 100%;
-  background-color: #dfdfdf;
-
-
-}
-
-/*primary area on the right that contains the canvas*/
-#main {
-  width: 80%;
-  height: 100%;
-  background-color: selectedColor;
+  background-color: #F8F8F8;
 }
 
 /*main painting canvas */
@@ -51,7 +42,6 @@ h1 {
   width: 20%;
   height:100%;
   padding-left: 30px;
-  padding-top: 15px;
   background-color: #26334A;
 
 }
@@ -67,10 +57,15 @@ h1 {
 .swatch {
   display: inline-block;
   padding: 10px;
-  height: 20px;
-  width:30px;
+  height: 10px;
+  width:15px;
   border: 1px solid black;
 
+}
+
+/*Contains the buttons*/
+#buttonDiv {
+  padding: 15px;
 }
 
 /* Assigns rules to the undo, clear, and erase buttons */
@@ -79,11 +74,8 @@ h1 {
   height: 30px;
   padding: 10px;
   display: inline;
-  position: absolute;
-  margin-top: 650px;
-  margin-left: 50px;
-
-
+  border-style: groove;
+  background-color: #FFFFFF;
 }
 
 #btnClear {
@@ -91,9 +83,8 @@ h1 {
   height: 30px;
   padding: 10px;
   display: inline;
-  position: absolute;;
-  margin-top: 650px;
-  margin-left: 150px;
+  border-style: groove;
+  background-color: #FFFFFF;
 }
 
 
