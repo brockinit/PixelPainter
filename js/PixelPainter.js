@@ -4,20 +4,27 @@ var selectedColor = null;
 
 //this draw the painting canvas and builds the page
 function Canvas () {
+
+  //set the mousedown to false for event listener purposes
   var mousedown = false;
+
+  var contentDiv = document.querySelector('.content');
   var canvas = document.getElementById('canvas');
+  var title = document.querySelector('#title');
 
   //sidebar class
   var sidebar = document.createElement('div');
+  //sidePiece.className = 'content';
   sidebar.id = 'sidePiece';
-  document.body.appendChild(sidebar);
+  contentDiv.appendChild(sidebar);
+  var getSideBar = document.querySelector('#sidePiece'); console.log(getSideBar);
+  getSideBar.appendChild(title);
 
   //erase button unfills the last filled comb
   var btnErase = document.createElement('button');
-  btnErase.className = 'sidePiece';
   btnErase.id = 'btnErase';
   btnErase.appendChild(document.createTextNode('Undo'));
-  document.body.appendChild(btnErase);
+  getSideBar.appendChild(btnErase);
   btnErase.addEventListener('click', function () {
     clickArray.pop();
     drawCanvas(context, boardWidth, boardHeight);
@@ -25,10 +32,9 @@ function Canvas () {
 
   //clear button *clears the canvas*
   var btnClear = document.createElement('button');
-  btnClear.className = 'sidePiece';
   btnClear.id = 'btnClear';
   btnClear.appendChild(document.createTextNode('Clear All'));
-  document.body.appendChild(btnClear);
+  getSideBar.appendChild(btnClear);
   btnClear.addEventListener('click', function () {
     clickArray = [];
     drawCanvas(context, boardWidth, boardHeight);
@@ -188,16 +194,9 @@ function Swatch () {
         var colorDiv = document.createElement('div');
         var leftContainer = document.querySelector('#sidePiece');
        
-        colorDiv.id = 'swatch';
-        colorDiv.style.display = 'inline-block';
+        colorDiv.className = 'swatch';
         colorDiv.style.background = preselectedColors[i][index];
         colorDiv.style = preselectedColors[i][index];
-        colorDiv.href = '#';
-        colorDiv.style.height = '20px';
-        colorDiv.style.width = '30px';
-        colorDiv.style.border = '1px solid black';
-        colorDiv.style.padding = '10px';
-
 
         colorDiv.addEventListener('click', returnColor);
 

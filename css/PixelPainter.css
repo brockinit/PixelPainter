@@ -8,7 +8,7 @@ ul, ol, dl {
 }
 
 h1 {
-  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+  font-family: 'Roboto Slab', serif;
   font-size: 24px;
   padding: 5px 10px;
   text-align: left;
@@ -16,40 +16,60 @@ h1 {
   text-rendering: optimizeLegibility;
 }
 
-a:hover, a:active, a:focus {
-  text-decoration: none;
+/*contains everything on the page*/
+.content {
+  width: 100%;
+  height: 100%;
+  background-color: #dfdfdf;
+
+
 }
 
-/*main canvas */
+/*primary area on the right that contains the canvas*/
+#main {
+  width: 80%;
+  height: 100%;
+  background-color: selectedColor;
+}
+
+/*main painting canvas */
 #canvas {
+  width: 70%;
+  height: 90%;
   border: 0;
   margin: 0 auto;
   display: block;
   padding: 10px;
   float: right;
-  margin-right: 10px;
-  margin-top: 50px;
-  background-color: #FFFFFF;
-
+  margin-right: 55px;
+  margin-top: 25px;
 }
 
 /*Content on the side ie: paint palette, buttons, and title */
-.sidePiece {
+#sidePiece {
   display: inline-block;
   width: 20%;
   height:100%;
-  padding-left: 50px;
-  padding-top: 20px;
+  padding-left: 30px;
+  padding-top: 15px;
+  background-color: #26334A;
+
 }
 
+/*the container for the title that will be placed in the top left of the sidebar*/
+#title {
+  padding: 10px;
+  text-align: center;
+  color: #F87217;
+}
 
 /* Layout of the colors that can be selected for painting */
-#swatch {
+.swatch {
   display: inline-block;
-  width: 20%;
-  height:100%;
-  padding-left: 50px;
-  padding-top: 20px;
+  padding: 10px;
+  height: 20px;
+  width:30px;
+  border: 1px solid black;
 
 }
 
@@ -58,8 +78,11 @@ a:hover, a:active, a:focus {
   width: 100px;
   height: 30px;
   padding: 10px;
-  margin-top: 25px;
-  margin-left: 40px;
+  display: inline;
+  position: absolute;
+  margin-top: 650px;
+  margin-left: 50px;
+
 
 }
 
@@ -67,6 +90,10 @@ a:hover, a:active, a:focus {
   width: 100px;
   height: 30px;
   padding: 10px;
+  display: inline;
+  position: absolute;;
+  margin-top: 650px;
+  margin-left: 150px;
 }
 
 
